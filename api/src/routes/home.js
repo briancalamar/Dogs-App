@@ -1,5 +1,9 @@
+require('dotenv').config();
 const { Router } = require('express');
 const bodyParser = require('body-parser');
+const axios = require('axios').default;
+const { API_KEY } = process.env;
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -10,7 +14,7 @@ router.use(bodyParser.json())
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/', (req, res) => {
-    console.log("wath sap")
+    console.log("ESTO ES LA API KEY --->", API_KEY)
 })
 
 module.exports = router;
