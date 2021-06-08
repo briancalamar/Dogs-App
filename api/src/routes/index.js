@@ -9,8 +9,8 @@ router.use(bodyParser.json())
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.get('/', (req, res) => {
-    console.log("wath sap")
+router.post('/', (req, res) => {
+    let { button } = req.button
 })
 
 module.exports = router;
