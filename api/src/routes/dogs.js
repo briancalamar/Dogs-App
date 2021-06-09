@@ -2,8 +2,8 @@ require('dotenv').config();
 const { Router } = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios').default;
-const { Dog, Temperament } = require('../db');
-const { Op } = require('sequelize'); 
+const { Dog, Temperament, dog_temperamet } = require('../db');
+const { Op } = require('sequelize');
 const { API_KEY } = process.env;
 
 
@@ -17,45 +17,44 @@ router.use(bodyParser.json())
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/', async (req, res) => {
-    let { name: n} = req.query;
+    let { name: n } = req.query;
     let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`);
-    if( n ) {
+    if (n) {
 
-        let info = []
-        let filtrado = data.filter( e => e.name.toLowerCase().includes(n.toLocaleLowerCase()))
-        filtrado.map( e => {
-            let { name, temperament, image } = e
-            image = image.url
-        
-            info.push({ name, temperament, image})
-        })
+        let filtrado = data.filter(e => e.name.toLowerCase().includes(n.toLocaleLowerCase()))
+        filtrado = filtrado.map( e => {
+            if (e.temperament) {
+                e.temperament = e.temperament.split(",")
+                .map(temperaments => { return temperaments.trim()})
+            }
+            return {
+                name: e.name,
+                temperament: e.temperament,
+                image: e.image.url
+            }
+        });
 
         let filtradoDb = await Dog.findAll({
             where: {
                 name: { [Op.like]: `%${n}` }
             },
+            attributes: ['name', 'image'],
             include: Temperament,
         })
-        if(filtradoDb) info = [...info, ...filtradoDb]
-        if(filtrado.length === 0) res.status(204).send({error: "No se encontro resultado"})
+        console.log(filtradoDb)
+        if (filtradoDb) filtrado = [...filtrado, ...filtradoDb]
+        if (filtrado.length === 0) res.status(204).send({ error: "No se encontro resultado" })
 
-        return res.json(info.slice(0,8))
+        return res.json(filtrado.slice(0, 8))
     }
-
-    res.json(data.slice(0,8))
-})
-
-
-router.get('/p', async (req, res) => {
-
-    let pepe = await Dog.create({
-        id: 200,
-        name: "african",
-        height: "22",
-        weight: "33",
-        image: "url"
-    })
-    await pepe.addTemperament(20);
+    filtrado = data.map( e => {
+        return {
+            name: e.name,
+            temperament: e.temperament,
+            image: e.image.url
+        }
+    });
+    res.json(filtrado.slice(0, 8))
 })
 
 

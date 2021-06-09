@@ -1,13 +1,14 @@
 require('dotenv').config();
 const { API_KEY } = process.env;
+const { Temperament } = require('../db');
 const axios = require('axios').default
 
 
 
-const cargaBD = async function () {
+const pedidoApi = async function () {
     let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`)
     let newinfo = [];
-    
+
     data.map(e => {
         let { temperament } = e;
         if (temperament) {
@@ -19,7 +20,15 @@ const cargaBD = async function () {
     return Array.from(new Set(newinfo))
 }
 
+const cargaBD = async function () {
+    let temperaments = await pedidoApi();
+    temperaments.forEach(async (e) => {
+        await Temperament.findOrCreate({
+            where: { name: `${e}` }
+        })
+    })
+}
+
 module.exports = {
     cargaBD,
 }
-
