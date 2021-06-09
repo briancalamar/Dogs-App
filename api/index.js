@@ -19,10 +19,19 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const { cargaBD } = require ('./src/functions') // esto no estaba
+const { Temperament } = require('./src/db'); // esto tampoco
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
+  server.listen(3001, async () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
+
+    let temperaments = await cargaBD()
+    temperaments.forEach(async (e) => {
+      await Temperament.findOrCreate({
+        where: { name: `${e}` }
+      })
+    })
   });
 });

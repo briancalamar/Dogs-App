@@ -6,6 +6,7 @@ const { Dog, Temperament } = require('../db');
 const { Op } = require('sequelize'); 
 const { API_KEY } = process.env;
 
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -19,6 +20,7 @@ router.get('/', async (req, res) => {
     let { name: n} = req.query;
     let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`);
     if( n ) {
+
         let info = []
         let filtrado = data.filter( e => e.name.toLowerCase().includes(n.toLocaleLowerCase()))
         filtrado.map( e => {
@@ -30,15 +32,14 @@ router.get('/', async (req, res) => {
 
         let filtradoDb = await Dog.findAll({
             where: {
-                name: {
-                  [Op.like]: `%${n}`
-                }
-            }
+                name: { [Op.like]: `%${n}` }
+            },
+            include: Temperament,
         })
-        if(filtradoDb) filtrado = [...filtrado, ...filtradoDb]
+        if(filtradoDb) info = [...info, ...filtradoDb]
         if(filtrado.length === 0) res.status(204).send({error: "No se encontro resultado"})
 
-        return res.json(filtrado.slice(0,8))
+        return res.json(info.slice(0,8))
     }
 
     res.json(data.slice(0,8))
@@ -46,12 +47,15 @@ router.get('/', async (req, res) => {
 
 
 router.get('/p', async (req, res) => {
-    await Dog.create({
+
+    let pepe = await Dog.create({
+        id: 200,
         name: "african",
         height: "22",
         weight: "33",
         image: "url"
     })
+    await pepe.addTemperament(20);
 })
 
 
