@@ -17,45 +17,52 @@ router.use(bodyParser.json())
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/', async (req, res) => {
-    let { name: n } = req.query;
+    let { name: n, page } = req.query;
+    if(!page) page = 1;
+    let spliceMin = 8 * (page - 1);
+    let spliceMax = (page * 8)
+    
     let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`);
-    if (n) {
 
-        let filtrado = data.filter(e => e.name.toLowerCase().includes(n.toLocaleLowerCase()))
-        filtrado = filtrado.map( e => {
-            if (e.temperament) {
-                e.temperament = e.temperament.split(",")
-                .map(temperaments => { return temperaments.trim()})
-            }
-            return {
-                name: e.name,
-                temperament: e.temperament,
-                image: e.image.url
-            }
-        });
-
-        let filtradoDb = await Dog.findAll({
-            where: {
-                name: { [Op.like]: `%${n}` }
-            },
-            attributes: ['name', 'image'],
-            include: Temperament,
-        })
-        console.log(filtradoDb)
-        if (filtradoDb) filtrado = [...filtrado, ...filtradoDb]
-        if (filtrado.length === 0) res.status(204).send({ error: "No se encontro resultado" })
-
-        return res.json(filtrado.slice(0, 8))
-    }
-    filtrado = data.map( e => {
+    let dataApi = data.map( e => {
+        if (e.temperament) {
+            e.temperament = e.temperament.split(",")
+            .map(temperaments => { return temperaments.trim()})
+        }
         return {
+            id: e.id,
             name: e.name,
-            temperament: e.temperament,
+            temperaments: e.temperament,
             image: e.image.url
         }
     });
-    res.json(filtrado.slice(0, 8))
+
+    let dataBd = await Dog.findAll({
+        attributes: ['id','name', 'image'],
+        include: Temperament,
+    })
+    dataBd = dataBd.map( e => {
+        if(e.temperaments){
+            e.temperaments = e.temperaments.map( e => e.name)
+        }
+        return {
+            id: e.id,
+            name: e.name,
+            image: e.image,
+            temperaments: e.temperaments,
+        }
+    })
+
+    if(dataBd) newdata = [...dataApi, ...dataBd];
+
+    if (n) {
+        newdata = newdata.filter(e => e.name.toLowerCase().includes(n.toLocaleLowerCase()))
+
+    }
+
+    res.json(newdata.slice(spliceMin, spliceMax))
 })
+
 
 
 module.exports = router;
