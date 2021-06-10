@@ -20,26 +20,29 @@ router.post('/', async (req, res) => {
         weightMin,
         weightMax, 
         life_span, 
-        image
+        image,
+        temperaments
     } = req.body;
   
-    let [newDog, created] = await Dog.findOrCreate({
-        where:{
+    let newDog = await Dog.findAll({
+        where:{ name }
+    })
+
+    if(newDog.length === 0) {
+        newDog = await Dog.create({
             name,
             height: `${heightMin} - ${heightMax}`,
             weight:`${weightMin} - ${weightMax}`,
-            life_span
-        },
-        // default: {
-        //     name,
-        //     height: `${heightMin} - ${heightMax}`,
-        //     weight:`${weightMin} - ${weightMax}`,
-        //     life_span,
-        //     image
-        // }
-    })
-    if(created) await newDog.addTemperament([20, 10, 5]);
-    res.sendStatus(200)
+            life_span,
+            image
+        })
+
+        await newDog.addTemperament(temperaments);
+        return res.json(newDog)
+    }
+    newDog.unshift({newDog:false})
+
+    res.json(newDog)
   })
   
 

@@ -4,7 +4,7 @@ const { Temperament } = require('../db');
 const axios = require('axios').default
 
 
-
+// Carga BD
 const pedidoApi = async function () {
     let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`)
     let newinfo = [];
@@ -20,7 +20,7 @@ const pedidoApi = async function () {
     return Array.from(new Set(newinfo))
 }
 
-const cargaBD = async function () {
+const cargaBb = async function () {
     let temperaments = await pedidoApi();
     temperaments.forEach(async (e) => {
         await Temperament.findOrCreate({
@@ -30,5 +30,5 @@ const cargaBD = async function () {
 }
 
 module.exports = {
-    cargaBD,
+    cargaBb,
 }
