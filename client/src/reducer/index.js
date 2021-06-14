@@ -4,7 +4,7 @@ let initialState = {
     temperaments: [],
 }
 
-function reducer(state = initialState, action) {
+export default function reducer(state = initialState, action) {
     switch (action.type){
         case "GET_DOGS": {
             return state = {...state, dogs: [...action.payload]}
@@ -12,5 +12,3 @@ function reducer(state = initialState, action) {
         default: {return state}
     }
 }
-
-export default reducer;

@@ -1,38 +1,36 @@
 import './App.css';
-// import { Route } from 'react-router-dom';
-import { connect } from 'react-redux'
-import { useEffect } from 'react'
-import { getAllDogs } from './reducer/actions';
+import { Route } from 'react-router-dom';
+import Cards from './components/Cards';
 
 
 function App(props) {
-
-  useEffect( () => {
-    props.getAllDogs();
-  }, [props.getAllDogs])
-
-  console.log(props.dogs)
-  console.log(props)
-
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
+      <Route path="/" component={Cards}/>
     </div>
   );
 }
 
+export default App
 
-function mapStateToProps(state) {
-  return {
-    dogs: state.dogs,
-    temperaments: state.temperaments
-  }
-}
+// useEffect( () => {
+//   props.getDogs();
+// }, [props.getDogs])
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getAllDogs: () => { dispatch(getAllDogs())}
-  }
-}
+// console.log(props.dogs)
+// console.log(props)
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// function mapStateToProps(state) {
+//   return {
+//     dogs: state.dogs,
+//     temperaments: state.temperaments
+//   }
+// }
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     getDogs: () => { dispatch(getDogs())}
+//   }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
