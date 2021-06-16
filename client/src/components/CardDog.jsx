@@ -1,5 +1,6 @@
 
 export default function CardDog({ name, temperaments, image, id }) {
+    let key = 0
     return (
         <div className="cardDog">
             <h2>{name}</h2>
@@ -7,7 +8,7 @@ export default function CardDog({ name, temperaments, image, id }) {
             <p>Temperaments</p>
                 <ul>
                     {
-                        temperaments.map(e => <li> {e} </li>)
+                        temperaments.map(e => <li key={e}> {e} </li>)
                     }
                 </ul>
             </div>

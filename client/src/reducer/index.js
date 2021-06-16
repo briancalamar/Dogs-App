@@ -1,5 +1,5 @@
 let initialState = {
-    dogs: [],
+    dogs: null,
     temperaments: [],
     infoPage: {
         page: undefined,
@@ -15,6 +15,9 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
         case "GET_DOGS": {
             return state = { ...state, dogs: [...action.payload] }
+        }
+        case "DETAIL_DOG": {
+           return state = { ...state, dogs: [action.payload] }
         }
         case "SEARCH": {
             return state = {
@@ -33,7 +36,7 @@ export default function reducer(state = initialState, action) {
         }
         case "RESET_INFO": {
             return state = {
-                dogs: [],
+                dogs: null,
                 temperaments: [],
                 infoPage: {
                     page: undefined,
