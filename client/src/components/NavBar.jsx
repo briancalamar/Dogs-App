@@ -1,11 +1,12 @@
 import { connect } from "react-redux"
 import { resetInfo, search } from "../reducer/actions"
 import { useState } from "react"
-import { Link, Redirect } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { FaSearch } from 'react-icons/fa'
 
 function CardDog({ search, resetInfo }) {
     const [input, setInput] = useState('');
+    const history = useHistory()
 
 
     function handleChange(e) {
@@ -21,18 +22,20 @@ function CardDog({ search, resetInfo }) {
         resetInfo()
         search(input)
         setInput("")
+        history.push("/home")
     }
 
     return (
         <div className="navBar">
-            <Link to="/dogs" onClick={handleClick}>
+            <Link to="/home" onClick={handleClick}>
                 <img alt="Logo" />
                 <h2> Find Your Best Friend </h2>
             </Link>
             <ul>
                 <li>
-                    <Link to="/dogs"> Home </Link>
+                    <Link to="/home" onClick={handleClick}> Home </Link>
                     <Link to="/createdog"> Create Dog </Link>
+                    <Link to="/temperaments"> Temperaments </Link>
                 </li>
             </ul>
             <form onSubmit={handleSubmit} >

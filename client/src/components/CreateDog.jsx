@@ -89,7 +89,7 @@ function CreateDog({ Stemp, getTemperaments, createDog}) {
                     <p>Life Span</p>
                     <input type="text" name="life_span" onChange={handleChange} />
                     <input type="text" name="image" onChange={handleChange} />
-                    <button>Submit</button>
+                    <button type="submit">Submit</button>
                 </form>
             </div>
             {/* --------------------------------------------------------------------- */}

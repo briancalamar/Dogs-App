@@ -3,8 +3,8 @@ let initialState = {
     temperaments: null,
     detailDog: null,
     infoPage: {
-        page: undefined,
         name: undefined,
+        page: undefined,
         order: undefined,
         filterSource: undefined,
         filterTemperaments: undefined,
@@ -29,13 +29,10 @@ export default function reducer(state = initialState, action) {
                 infoPage: { ...state.infoPage, name: action.payload }
             }
         }
-        case "SHOW_BAR": {
+        case "INFO_PAGE": {
             return state = {
                 ...state,
-                infoPage: {
-                    ...state.infoPage,
-                    showBar: !state.infoPage.showBar
-                }
+                 infoPage: {...state.infoPage, ...action.payload} 
             }
         }
         case "RESET_INFO": {
@@ -49,7 +46,7 @@ export default function reducer(state = initialState, action) {
                     order: undefined,
                     filterSource: undefined,
                     filterTemperaments: undefined,
-                    nav: false,
+                    showBar: false,
                 }
             }
         }
@@ -62,3 +59,13 @@ export default function reducer(state = initialState, action) {
         default: { return state }
     }
 }
+
+// case "SHOW_BAR": {
+//     return state = {
+//         ...state,
+//         infoPage: {
+//             ...state.infoPage,
+//             showBar: !state.infoPage.showBar
+//         }
+//     }
+// }

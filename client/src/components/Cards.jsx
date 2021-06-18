@@ -22,12 +22,12 @@ function Cards({ dogs, getDogs, infoPage, resetInfo, detailDog }) {
     return (
         <div className="cards">
             {
-                dogs === null ? <img src="https://i.imgur.com/lcBJyGn.gif" alt="cargando" /> : dogs[0].error ?
-                    <Link to="/dogs" onClick={handleClick}>
+                dogs === null ? <img src="https://i.imgur.com/lcBJyGn.gif" alt="cargando" /> : dogs.length === 0 ?
+                    <Link to="/home" onClick={handleClick}>
                         <DogError/>
                     </Link> :
                     dogs.map(e =>
-                        <Link to={`/dogs/${e.name}`} onClick={() => handleClick(e.id)} key={e.id}>
+                        <Link to={`/home/${e.name}`} onClick={() => handleClick(e.id)} key={e.id}>
                             <CardDog
                                 id={e.id}
                                 name={e.name}

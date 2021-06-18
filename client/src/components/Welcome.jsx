@@ -7,7 +7,7 @@ export default function Welcome() {
         <div className="welcome">
             <div>
                 <p>“It is amazing how much love and laughter they bring into our lives and even how much closer we become with each other because of them.” – John Grogan</p>
-                <Link to="/dogs">
+                <Link to="/home">
                     <button> Click here </button>
                 </Link>
             </div>

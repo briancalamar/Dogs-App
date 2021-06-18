@@ -44,13 +44,17 @@ export function createDog(data) {
     }
 }
 
-const actions = {
-    getDogs,
-    detailDog,
-    createDog,
-    search,
-    showBar
+export function infoPage(payload) {
+    return { type: "INFO_PAGE", payload }
 }
 
+// const actions = {
+//     getDogs,
+//     detailDog,
+//     createDog,
+//     search,
+//     showBar
+// }
 
-export default  actions;
+
+// export default  actions;
