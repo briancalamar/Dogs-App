@@ -1,6 +1,7 @@
 let initialState = {
     dogs: null,
-    temperaments: [],
+    temperaments: null,
+    detailDog: null,
     infoPage: {
         page: undefined,
         name: undefined,
@@ -17,7 +18,10 @@ export default function reducer(state = initialState, action) {
             return state = { ...state, dogs: [...action.payload] }
         }
         case "DETAIL_DOG": {
-           return state = { ...state, dogs: [action.payload] }
+           return state = { ...state, detailDog: action.payload }
+        }
+        case "GET_TEMP": {
+            return state = {...state, temperaments: action.payload}
         }
         case "SEARCH": {
             return state = {
@@ -38,6 +42,7 @@ export default function reducer(state = initialState, action) {
             return state = {
                 dogs: null,
                 temperaments: [],
+                detailDog: null,
                 infoPage: {
                     page: undefined,
                     name: undefined,
@@ -46,6 +51,12 @@ export default function reducer(state = initialState, action) {
                     filterTemperaments: undefined,
                     nav: false,
                 }
+            }
+        }
+        case "CREATE_DOG": {
+            return state = {
+                ...state,
+                detailDog: action.payload
             }
         }
         default: { return state }

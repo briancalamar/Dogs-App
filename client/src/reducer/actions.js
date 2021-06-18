@@ -8,6 +8,14 @@ export function getDogs({name, page, order, filterSource, filterTemperaments}) {
     }
 }
 
+export function getTemperaments() {
+    return (dispatch) => {
+        axios.get(`http://localhost:3001/temperament`).then(response => {
+            dispatch({ type: "GET_TEMP", payload: response.data })
+        })
+    }
+}
+
 export function search(payload) {
     return { type: "SEARCH", payload}
 }
@@ -28,8 +36,12 @@ export function showBar() {
     return { type: "SHOW_BAR" }
 }
 
-export function createDog(payload) {
-    return { type: "CREATE_DOG", payload }
+export function createDog(data) {
+    return (dispatch) => {
+        axios.post(`http://localhost:3001/dog`, data).then(response => {
+            dispatch({ type: "CREATE_DOG", payload: response.data })
+        })
+    }
 }
 
 const actions = {

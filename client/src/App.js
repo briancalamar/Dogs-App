@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import  { connect } from "react-redux";
 import Welcome from './components/Welcome';
 import DogDetail from './components/DogDetail';
+import CreateDog from './components/CreateDog';
 
 
 function App({showBar}) {
@@ -15,6 +16,7 @@ function App({showBar}) {
       } */}
       <Route exact path="/" component={Welcome}/>
       <Route path="/:dogs" component={NavBar}/>
+      <Route exact path="/createdog" component={CreateDog}/>
       <Route exact path="/dogs" component={Cards}/>
       <Route exact path="/dogs/:name" component={DogDetail}/>
     </div>

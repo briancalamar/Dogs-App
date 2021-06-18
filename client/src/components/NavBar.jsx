@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 import { resetInfo, search } from "../reducer/actions"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { FaSearch } from 'react-icons/fa'
 
 function CardDog({ search, resetInfo }) {
@@ -29,9 +29,15 @@ function CardDog({ search, resetInfo }) {
                 <img alt="Logo" />
                 <h2> Find Your Best Friend </h2>
             </Link>
+            <ul>
+                <li>
+                    <Link to="/dogs"> Home </Link>
+                    <Link to="/createdog"> Create Dog </Link>
+                </li>
+            </ul>
             <form onSubmit={handleSubmit} >
-                <input type="text" value={input} onChange={handleChange}/>
-                <button type="submit"> <FaSearch/></button>
+                <input type="text" value={input} onChange={handleChange} />
+                <button type="submit"> <FaSearch /></button>
             </form>
         </div>
     )
