@@ -1,12 +1,21 @@
 import axios from 'axios'
 
-export function getDogs({name, page, order, filterSource, filterTemperaments}) {
+export function getDogs({name, page, order, filterSource, ft}) {
     return (dispatch) => {
-        axios.get(`http://localhost:3001/dogs?name=${name}&page=${page}&o=${order}&fs=${filterSource}&ft=${filterTemperaments}`).then(response => {
+        axios.get(`http://localhost:3001/dogs?name=${name}&page=${page}&o=${order}&fs=${filterSource}`).then(response => {
             dispatch({ type: "GET_DOGS", payload: response.data })
         })
     }
 }
+
+export function getDogsFilter({filterTemperaments}) {
+    return (dispatch) => {
+        axios.get(`http://localhost:3001/dogs?ft=${filterTemperaments}`).then(response => {
+            dispatch({ type: "GET_DOGS_FILTER", payload: response.data })
+        })
+    }
+}
+
 
 export function getTemperaments() {
     return (dispatch) => {
@@ -44,17 +53,10 @@ export function createDog(data) {
     }
 }
 
+export function filterByTemp(payload) {
+    return { type: "FILTER_BY_TEMP", payload}
+}
+
 export function infoPage(payload) {
     return { type: "INFO_PAGE", payload }
 }
-
-// const actions = {
-//     getDogs,
-//     detailDog,
-//     createDog,
-//     search,
-//     showBar
-// }
-
-
-// export default  actions;

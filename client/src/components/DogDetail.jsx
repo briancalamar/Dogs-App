@@ -11,7 +11,7 @@ function DogDetail({ dog }) {
 
 
     return (
-        <div>
+        <div className="detailDog">
             {
                 dog === null ? <img src="https://i.imgur.com/lcBJyGn.gif" alt="cargando" /> :
                     <div>
@@ -42,7 +42,7 @@ function DogDetail({ dog }) {
                                 <p>{dog.life_span}</p>
                             </section>
                         </div>
-                        <img src={`${dog.image}`} alt="Image Dog" />
+                        <img src={`${dog.image}`} alt="Dog" />
                     </div>
             }
         </div>

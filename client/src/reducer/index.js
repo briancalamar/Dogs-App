@@ -1,11 +1,12 @@
 let initialState = {
     dogs: null,
+    dogsFilter: null,
     temperaments: null,
     detailDog: null,
     infoPage: {
         name: undefined,
-        page: undefined,
-        order: undefined,
+        page: 1,
+        order: "na",
         filterSource: undefined,
         filterTemperaments: undefined,
         showBar: false,
@@ -18,10 +19,10 @@ export default function reducer(state = initialState, action) {
             return state = { ...state, dogs: [...action.payload] }
         }
         case "DETAIL_DOG": {
-           return state = { ...state, detailDog: action.payload }
+            return state = { ...state, detailDog: action.payload }
         }
         case "GET_TEMP": {
-            return state = {...state, temperaments: action.payload}
+            return state = { ...state, temperaments: action.payload }
         }
         case "SEARCH": {
             return state = {
@@ -32,18 +33,19 @@ export default function reducer(state = initialState, action) {
         case "INFO_PAGE": {
             return state = {
                 ...state,
-                 infoPage: {...state.infoPage, ...action.payload} 
+                infoPage: { ...state.infoPage, ...action.payload }
             }
         }
         case "RESET_INFO": {
             return state = {
                 dogs: null,
-                temperaments: [],
+                dogsFilter: null,
+                temperaments: null,
                 detailDog: null,
                 infoPage: {
-                    page: undefined,
                     name: undefined,
-                    order: undefined,
+                    page: 1,
+                    order: "na",
                     filterSource: undefined,
                     filterTemperaments: undefined,
                     showBar: false,
@@ -56,6 +58,14 @@ export default function reducer(state = initialState, action) {
                 detailDog: action.payload
             }
         }
+        //-------------------
+        case "GET_DOGS_FILTER": {
+            return state = {
+                ...state,
+                dogsFilter: action.payload
+            }
+        }
+        //-------------------
         default: { return state }
     }
 }

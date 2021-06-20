@@ -1,3 +1,4 @@
+import './Style/NavBar.css'
 import { connect } from "react-redux"
 import { resetInfo, search } from "../reducer/actions"
 import { useState } from "react"
@@ -27,20 +28,38 @@ function CardDog({ search, resetInfo }) {
 
     return (
         <div className="navBar">
-            <Link to="/home" onClick={handleClick}>
-                <img alt="Logo" />
-                <h2> Find Your Best Friend </h2>
+            <Link to="/home"
+                onClick={handleClick}
+                className="logo"
+            >
+                <img
+                    src="/home/brian/Documentos/Henry/PI-Dogs-FT13/dog.png"
+                    alt="Logo"
+                />
+                {/* <h2> Dogs App </h2> */}
             </Link>
-            <ul>
+            <ul className="nav">
                 <li>
-                    <Link to="/home" onClick={handleClick}> Home </Link>
-                    <Link to="/createdog"> Create Dog </Link>
-                    <Link to="/temperaments"> Temperaments </Link>
+                    <Link 
+                    to="/home" 
+                    onClick={handleClick}
+                    className="nav-link"
+                    > Home </Link>
+                    <Link 
+                    to="/createdog"
+                    className="nav-link"
+                    > Create Dog </Link>
                 </li>
             </ul>
             <form onSubmit={handleSubmit} >
-                <input type="text" value={input} onChange={handleChange} />
-                <button type="submit"> <FaSearch /></button>
+                <input
+                    type="text"
+                    value={input}
+                    onChange={handleChange}
+                    placeholder="  Search . . ."
+                    className="nav-s"
+                />
+                <button type="submit" className="nav-bs"> <FaSearch /></button>
             </form>
         </div>
     )

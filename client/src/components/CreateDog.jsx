@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
+import { useHistory } from "react-router"
 import { connect } from "react-redux"
 import { createDog, getTemperaments } from "../reducer/actions"
-import { Link } from "react-router-dom"
 
 
 function CreateDog({ Stemp, getTemperaments, createDog}) {
@@ -16,6 +16,8 @@ function CreateDog({ Stemp, getTemperaments, createDog}) {
         temperaments: []
     })
 
+    let history = useHistory()
+
     const empyImage = "https://st.depositphotos.com/1798678/3986/v/600/depositphotos_39864187-stock-illustration-dog-silhouette-vector.jpg"
 
     useEffect(() => {
@@ -23,7 +25,6 @@ function CreateDog({ Stemp, getTemperaments, createDog}) {
     }, [])
 
     function handleChange(e) {
-        console.log(e.target.name)
         if (e.target.name === "temperaments") {
             let include = dog.temperaments.includes(e.target.value)
 
@@ -49,6 +50,7 @@ function CreateDog({ Stemp, getTemperaments, createDog}) {
         e.preventDefault();
         await createDog(dog)
         alert(" Breed created. Find your dog by name")
+        history.push(`/home`)
     }
 
     return (
@@ -136,7 +138,7 @@ function CreateDog({ Stemp, getTemperaments, createDog}) {
                                     }
                                 </section>
                             </div>
-                            <img src={dog.image || empyImage} alt="Image Dog" />
+                            <img src={dog.image || empyImage} alt="Dog" />
                         </div>
                 }
             </div>
@@ -148,7 +150,7 @@ function CreateDog({ Stemp, getTemperaments, createDog}) {
 function mapDispatchToProps(dispatch) {
     return {
         getTemperaments: () => dispatch(getTemperaments()),
-        createDog: (info) => dispatch(createDog(info))
+        createDog: (info) => dispatch(createDog(info)),
     }
 }
 

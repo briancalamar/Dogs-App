@@ -1,6 +1,5 @@
 
-export default function CardDog({ name, temperaments, image, id }) {
-    let key = 0
+export default function CardDog({ name, temperaments, image}) {
     return (
         <div className="cardDog" style={{backgroundImage: 'url(' + image + ')'}}>
             <h2>{name}</h2>
@@ -8,7 +7,7 @@ export default function CardDog({ name, temperaments, image, id }) {
             <p>Temperaments</p>
                 <ul>
                     {
-                        temperaments ? temperaments.map(e => <li key={e} > {e} </li>) :
+                        temperaments ? temperaments.map((e, i)=> <li key={i} > {e} </li>) :
                         <li>No data</li>
                     }
                 </ul>

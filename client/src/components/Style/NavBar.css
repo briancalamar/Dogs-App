@@ -1,0 +1,65 @@
+.navBar {
+    height: 10vh;
+    max-height: 75px;
+    margin: 10px 0px 20px 0px;
+    padding: 0px 50px;
+    display: flex;
+    border-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(212, 127, 71, 0.705);
+}
+
+.nav {
+    padding: 0;
+    margin: 0;
+}
+
+.nav li {
+    display: inline-block;
+}
+
+.nav-link {
+    font-size: 1.3em;
+    padding: 0 5px;
+    text-decoration: none;
+    margin: 0 10px;
+    color: white;
+    border-radius: 5px;
+    transition: 0.6s color; 
+    transition: 0.3s font-size; 
+}
+
+.nav-link:hover {
+    font-size: 1.6em;
+    height: 10vh;
+    padding-left: 10px;
+    color: rgb(107, 63, 33);
+}
+
+.nav-s {
+    height: 25px;
+    width: 40%;
+    border: none;
+    border-radius: 30px;
+    margin-right: 5px;
+    transition: 0.7s width;
+}
+
+.nav-s:hover {
+    width: 80%;
+    border: none
+}
+
+.nav-bs {
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+}
+
+
+/* const image = "https://thumbs.dreamstime.com/b/patr%C3%B3n-de-vectores-sin-fisuras-con-huella-pezu%C3%B1a-animal-ca%C3%B3tica-fondo-huellas-perros-173518478.jpg";
+
+// const image2 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROG_ju_azqDR0b_G7ATBaECUJ0nx0UjbtjmQ&usqp=CAU"
+
+// const image3 = "https://media.istockphoto.com/vectors/seamless-vector-pattern-traces-of-paws-vector-id539440756?b=1&k=6&m=539440756&s=612x612&w=0&h=149YuwmttF07_avaHn9xp0YXDvPqvxlb_7hUfhbdl2M=" */

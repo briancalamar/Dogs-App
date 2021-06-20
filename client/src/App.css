@@ -1,8 +1,12 @@
 .App {
+  padding: 0px;
+  margin: 0px 2%;
   text-align: center;
+  background-color: white;
+  /* background-image: url(https://thumbs.dreamstime.com/b/patr%C3%B3n-de-vectores-sin-fisuras-con-huella-pezu%C3%B1a-animal-ca%C3%B3tica-fondo-huellas-perros-173518478.jpg); */
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -35,4 +39,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

@@ -1,0 +1,44 @@
+.w{
+    background-image: url(https://images8.alphacoders.com/371/thumb-1920-371423.jpg) ;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.w-t{
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.26);
+    width: 40%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.w-t p {
+    margin: 50px;
+    font-size: 1.5em;
+}
+
+.w-b {
+    border-radius: 10px;
+    width: 80%;
+    height: 12%;
+    background-color: rgba(212, 127, 71, 0.842);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: white;
+}
+
+.w-b:hover {
+    background-color: white;
+    color: rgba(250, 173, 121, 0.925);
+}
+
