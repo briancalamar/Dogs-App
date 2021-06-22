@@ -13,6 +13,7 @@ const dog = {
   image: "image",
 };
 
+const temperaments = [1, 2];
 
 describe('Dogs routes', () => {
   before(() => conn.authenticate()
@@ -20,7 +21,8 @@ describe('Dogs routes', () => {
       console.error('Unable to connect to the database:', err);
     }));
   beforeEach(() => Dog.sync({ force: true })
-    .then(() => Dog.create(dog)));
+    .then(() => Dog.create(dog))
+    .then((response) => response.addTemperament(temperaments)));
   describe('GET /dogs', () => {
     it('should get 200', () =>
       agent.get('/dogs').expect(200)
@@ -32,7 +34,10 @@ describe('Dogs routes', () => {
             id: 1000,
             name: "Pug",
             image: "image",
-            temperaments: [],
+            temperaments: [
+              "Stubborn",
+              "Curious"
+            ],
             weight: 15
         })
     })
