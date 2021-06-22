@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const { Dog } = require('../db');
 
 
-
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -13,7 +12,7 @@ const router = Router();
 router.use(bodyParser.json())
 
 router.post('/', async (req, res) => {
-    const { 
+    let { 
         name, 
         heightMin, 
         heightMax, 
@@ -23,26 +22,39 @@ router.post('/', async (req, res) => {
         image,
         temperaments
     } = req.body;
-  
-    let newDog = await Dog.findAll({
-        where:{ name }
-    })
 
-    if(newDog.length === 0) {
-        newDog = await Dog.create({
-            name,
-            height: `${heightMin} - ${heightMax}`,
-            weight:`${weightMin} - ${weightMax}`,
-            life_span,
-            image
+    if (temperaments?.length !== 0) {
+        temperaments = temperaments.map( e => {
+            e = e.split("|")
+            return parseInt(e[1])
         })
-
-        await newDog.addTemperament(temperaments);
-        return res.json(newDog)
     }
-    newDog.unshift({newDog:false})
 
-    res.json(newDog)
+    try {  
+        let newDog = await Dog.findAll({
+            where:{ name }
+        })
+    
+
+        if(newDog.length === 0) {
+            newDog = await Dog.create({
+                name,
+                height: `${heightMin} - ${heightMax}`,
+                weight:`${weightMin} - ${weightMax}`,
+                life_span: `${life_span} years`,
+                image
+            })
+    
+            await newDog.addTemperament(temperaments);
+            return res.json({created:true})
+        }
+        newDog.unshift({created:false})
+    
+        res.json(newDog)
+    } catch (error) {
+        res.status(400).json({problem: "check data sended"})
+    }
+    
   })
   
 

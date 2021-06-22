@@ -26,7 +26,7 @@ module.exports = async (sequelize) => {
 
   Dog.beforeCreate(async (dog) => {
     if( isNaN( await Dog.max("id"))){
-        dog.id = 265;
+        dog.id = 1000;
     }
     else dog.id = await Dog.max("id") + 1
   });

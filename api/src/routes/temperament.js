@@ -16,8 +16,14 @@ const router = Router();
 router.use(bodyParser.json())
 
 router.get('/', async (req, res) => {
-    let temperaments = await Temperament.findAll()
-    res.json(temperaments)
+    try {
+        let temperaments = await Temperament.findAll()
+        res.json(temperaments)
+    } catch (error) {
+        console.log(error.data)
+    }
+
+
 })
 
 
