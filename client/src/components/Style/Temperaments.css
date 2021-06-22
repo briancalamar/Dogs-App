@@ -1,0 +1,10 @@
+.temperaments{
+    /* background-color: blue; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.temp-l {
+    text-decoration: none;
+}

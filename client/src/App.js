@@ -1,12 +1,11 @@
 import './App.css';
 import { Route } from 'react-router-dom';
-import Cards from './components/Cards';
 import NavBar from './components/NavBar';
 import Welcome from './components/Welcome';
 import DogDetail from './components/DogDetail';
 import CreateDog from './components/CreateDog';
-import Sorts from './components/Sorts';
 import Temperaments from './components/Temperaments';
+import Cardsort from './components/Cardsort';
 
 
 export default function App({showBar}) {
@@ -17,8 +16,9 @@ export default function App({showBar}) {
       } */}
       <Route exact path="/" component={Welcome}/>
       <Route path="/:homecreate" component={NavBar}/>
-      <Route path="/home" component={Sorts}/>
-      <Route exact path="/home" component={Cards}/>
+      {/* <Route path="/home" component={Sorts}/>
+      <Route exact path="/home" component={Cards}/> */}
+      <Route exact path="/home" component={Cardsort}/>
       <Route exact path="/createdog" component={CreateDog}/>
       <Route exact path="/home/:name" component={DogDetail}/>
       <Route path="/temperaments" component={Temperaments}/>

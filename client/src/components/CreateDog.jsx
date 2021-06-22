@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router"
 import { connect } from "react-redux"
 import { createDog, getTemperaments } from "../reducer/actions"
+import './Style/CreateDog.css'
+import { IoPawSharp } from 'react-icons/io5'
 
 
-function CreateDog({ Stemp, getTemperaments, createDog}) {
+function CreateDog({ Stemp, getTemperaments, createDog }) {
     const [dog, setDog] = useState({
         name: undefined,
         heightMin: undefined,
@@ -18,7 +20,7 @@ function CreateDog({ Stemp, getTemperaments, createDog}) {
 
     let history = useHistory()
 
-    const empyImage = "https://st.depositphotos.com/1798678/3986/v/600/depositphotos_39864187-stock-illustration-dog-silhouette-vector.jpg"
+    const emptyImage = "https://st.depositphotos.com/1798678/3986/v/600/depositphotos_39864187-stock-illustration-dog-silhouette-vector.jpg"
 
     useEffect(() => {
         getTemperaments();
@@ -60,23 +62,24 @@ function CreateDog({ Stemp, getTemperaments, createDog}) {
                     <p>Name</p>
                     <input type="text"
                         name="name"
+                        placeholder="    Name"
                         onChange={handleChange} required />
                     <p>Weight</p>
                     <input type="text"
-                        placeholder="Miminum weight"
+                        placeholder="    Miminum weight"
                         name="weightMin"
                         onChange={handleChange} required />
                     <input type="text"
-                        placeholder="Maximum weight"
+                        placeholder="    Maximum weight"
                         name="weightMax"
                         onChange={handleChange} required />
                     <p>Height</p>
                     <input type="text"
-                        placeholder="Miminum height"
+                        placeholder="    Miminum height"
                         name="heightMin"
                         onChange={handleChange} required />
                     <input type="text"
-                        placeholder="Maximum height"
+                        placeholder="    Maximum height"
                         name="heightMax"
                         onChange={handleChange} required />
                     <p>Temperaments</p>
@@ -89,58 +92,63 @@ function CreateDog({ Stemp, getTemperaments, createDog}) {
                             </select>
                     }
                     <p>Life Span</p>
-                    <input type="text" name="life_span" onChange={handleChange} />
-                    <input type="text" name="image" onChange={handleChange} />
-                    <button type="submit">Submit</button>
+                    <input 
+                    type="text" 
+                    name="life_span"
+                    placeholder="    Life span ej(10-11)" 
+                    onChange={handleChange} />
+                    <input 
+                    type="text" 
+                    name="image"
+                    placeholder="    Insert URL image" 
+                    onChange={handleChange} />
+                    <button type="submit"><IoPawSharp/></button>
                 </form>
             </div>
             {/* --------------------------------------------------------------------- */}
             <div className="prevDog">
-                {
-                    dog === null ? <img src="https://i.imgur.com/lcBJyGn.gif" alt="cargando" /> :
+                <div className="prevDog-d">
+                    {
+                        dog.name ? <h1>{dog.name}</h1> : <p>-</p>
+                    }
+                    <div>
                         <div>
-                            <div className="prevDog">
-                                {
-                                    dog.name ? <h1>{dog.name}</h1> : <p>-</p>
-                                }
-                                <div>
-                                    <div>
-                                        <label >Minimum weight</label>
-                                        {
-                                            dog.weightMin ? <p>{dog.weightMin}</p> : <p>-</p>
-                                        }
-                                        <label >Maximum weight</label>
-                                        {
-                                            dog.weightMax ? <p>{dog.weightMax}</p> : <p>-</p>
-                                        }
-                                    </div>
-                                    <div>
-                                        <label >Minimum height</label>
-                                        {
-                                            dog.heightMin ? <p>{dog.heightMin}</p> : <p>-</p>
-                                        }
-                                        <label >Maximum height</label>
-                                        {
-                                            dog.heightMax ? <p>{dog.heightMax}</p> : <p>-</p>
-                                        }
-                                    </div>
-                                </div>
-                                <ul>
-                                    {
-                                        dog.temperaments === undefined || dog.temperaments.length === 0 ? <h3>No data</h3> :
-                                            dog.temperaments.map((e, i) => <li key={i}> {e} </li>)
-                                    }
-                                </ul>
-                                <section>
-                                    <h4> Life span </h4>
-                                    {
-                                        dog.life_span ? <p>{dog.life_span}</p> : <p>-</p>
-                                    }
-                                </section>
-                            </div>
-                            <img src={dog.image || empyImage} alt="Dog" />
+                            <label >Minimum weight</label>
+                            {
+                                dog.weightMin ? <p>{dog.weightMin}</p> : <p>-</p>
+                            }
+                            <label >Maximum weight</label>
+                            {
+                                dog.weightMax ? <p>{dog.weightMax}</p> : <p>-</p>
+                            }
                         </div>
-                }
+                        <div>
+                            <label >Minimum height</label>
+                            {
+                                dog.heightMin ? <p>{dog.heightMin}</p> : <p>-</p>
+                            }
+                            <label >Maximum height</label>
+                            {
+                                dog.heightMax ? <p>{dog.heightMax}</p> : <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <ul>
+                        {
+                            dog.temperaments === undefined || dog.temperaments.length === 0 ? <h3>No data</h3> :
+                                dog.temperaments.map((e, i) => <li key={i}> {e} </li>)
+                        }
+                    </ul>
+                    <section>
+                        <h4> Life span </h4>
+                        {
+                            dog.life_span ? <p>{dog.life_span}</p> : <p>-</p>
+                        }
+                    </section>
+                </div>
+                <div className="prevDog-d prevDog-d-img">
+                    <img src={dog.image || emptyImage} alt="Dog" />
+                </div>
             </div>
         </div>
     )

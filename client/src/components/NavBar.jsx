@@ -4,6 +4,7 @@ import { resetInfo, search } from "../reducer/actions"
 import { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { FaSearch } from 'react-icons/fa'
+import logo from '../dog.png'
 
 function CardDog({ search, resetInfo }) {
     const [input, setInput] = useState('');
@@ -33,10 +34,9 @@ function CardDog({ search, resetInfo }) {
                 className="logo"
             >
                 <img
-                    src="/home/brian/Documentos/Henry/PI-Dogs-FT13/dog.png"
+                    src={logo}
                     alt="Logo"
                 />
-                {/* <h2> Dogs App </h2> */}
             </Link>
             <ul className="nav">
                 <li>

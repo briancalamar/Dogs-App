@@ -1,0 +1,54 @@
+.cardDog {
+    border-radius: 10px;
+    /* width: 500px; */
+    width: 40vw;
+    height: 350px;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    text-decoration: none;
+    transition: 0.7s width, height linear 0.5s;
+    box-shadow: 0 0 20px black;
+}
+
+.info-cd {
+    background-color: rgba(54, 50, 50, 0.445);
+    border-radius: 5px;
+    margin-right: 5px;
+    width: 80%;
+    height: 80%;
+    font-size: 0.8em;
+    color: white;
+    transition: 0.7s color, background-color linear ;
+}
+
+.cardDog:hover {
+    width: 450px;
+    height: 300px;
+}
+
+.info-cd:hover {
+    color: transparent;
+    background-color: transparent;
+}
+
+@media (max-width: 1000px) {
+    .cardDog {
+        width: 50vw;
+        min-width: 400px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cardDog {
+        width: 70vw;
+        height: 200px;
+    }
+
+    .cardDog:hover {
+        width: 80vw;
+        height: 250px;
+    }
+}

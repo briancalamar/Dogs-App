@@ -1,0 +1,40 @@
+.cardTemp {
+    background-image: 
+    linear-gradient(
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0.6)
+      ),url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROG_ju_azqDR0b_G7ATBaECUJ0nx0UjbtjmQ&usqp=CAU);
+    /* background-color: #1E6362; */
+    border-radius: 7px;
+    width: 450px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 7px;
+    border: solid 6px #413f40;
+    box-shadow: 0 0 15px black;
+    color: black;
+    transition: 0.7s width, height,background-image linear 0.5s;
+}
+
+.cardTemp:hover{
+    width: 400px;
+    height: 65px;
+    background-image:linear-gradient(
+        #45e8e5cb,
+        #45e8e5cb
+      ) ;
+}
+
+
+/* background-image:linear-gradient(
+    rgba(48, 173, 245, 0.6),
+    rgba(84, 182, 228, 0.6)
+  ) ; */
+
+/* 
+https://image.freepik.com/vector-gratis/huella-pata-perro_71328-278.jpg */
+
+/* https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9bISZ5EI1s-IMhzAvUwcUQGaYbcMIPEyq5Q&usqp=CAU */

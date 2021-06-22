@@ -1,42 +1,8 @@
 .App {
   padding: 0px;
-  margin: 0px 2%;
+  min-height: 100vh;
+  /* margin: 0px 2%; */
   text-align: center;
   background-color: white;
-  /* background-image: url(https://thumbs.dreamstime.com/b/patr%C3%B3n-de-vectores-sin-fisuras-con-huella-pezu%C3%B1a-animal-ca%C3%B3tica-fondo-huellas-perros-173518478.jpg); */
+  background-image: url(https://media.istockphoto.com/vectors/seamless-vector-pattern-traces-of-paws-vector-id539440756?b=1&k=6&m=539440756&s=612x612&w=0&h=149YuwmttF07_avaHn9xp0YXDvPqvxlb_7hUfhbdl2M=);
 }
-
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */

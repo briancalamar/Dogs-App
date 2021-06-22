@@ -1,0 +1,13 @@
+.cards {
+    margin-top: 20px;
+    width: 85%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-decoration: none;
+    padding-right: 30px;
+}
+
+.cards-link {
+    text-decoration: none;
+}
