@@ -20,7 +20,7 @@ var dogsBd = [];
 
 router.get('/', async (req, res) => {
     let { name: n, page, o, fs, ft } = req.query;
-    if (page === "undefined" || page <= 0) page = 1;
+    if (page === "undefined" || page <= 0 || !page) page = 1;
     if (n === "undefined") n = undefined;
     if (o === "undefined") o = undefined;
     if (fs === "undefined") fs = undefined;
@@ -56,6 +56,7 @@ router.get('/', async (req, res) => {
 
     if (o) newdata = orderData(newdata, o)
 
+    console.log(spliceMin, "  ", spliceMax)
     res.json(newdata.slice(spliceMin, spliceMax))
 })
 

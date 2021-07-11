@@ -1,3 +1,4 @@
+/* eslint-disable jest/valid-expect */
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
@@ -5,7 +6,7 @@ import CardDog from '../CardDog'
 
 test('Render first Card Dog', () => {
 
-    const { container, getByText } = render(
+    const { getByText } = render(
         <CardDog
             id={1}
             name={"Scooby"}
@@ -25,7 +26,7 @@ test('Render first Card Dog', () => {
 
 test('Render CardDog', () => {
 
-    const { container, getByText } = render(
+    const { getByText } = render(
         <CardDog
             id={1}
             name={"Brian PI"}

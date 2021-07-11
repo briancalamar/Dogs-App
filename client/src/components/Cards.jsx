@@ -1,8 +1,8 @@
-import CardDog from "./CardDog"
-import { connect } from "react-redux"
 import { useEffect } from "react"
-import { detailDog, getDogs, resetInfo } from "../reducer/actions"
 import { Link } from "react-router-dom"
+import { connect } from "react-redux"
+import { detailDog, getDogs, resetInfo } from "../reducer/actions"
+import CardDog from "./CardDog"
 import './Style/Cards.css'
 
 function Cards({ dogs, getDogs, infoPage, resetInfo, detailDog }) {
@@ -76,3 +76,8 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cards)
 
+
+
+// sudo lsof -t -i:3001
+// sudo kill -9 <PID>
+// sudo kill -9 $(sudo lsof -t -i:3001)

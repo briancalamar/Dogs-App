@@ -1,7 +1,7 @@
-import { connect } from "react-redux";
-import { infoPage, resetInfo } from "../reducer/actions";
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
+import { connect } from "react-redux";
+import { infoPage, resetInfo } from "../reducer/actions";
 import './Style/Sorts.css'
 
 function Sorts({ infoPage, page }) {

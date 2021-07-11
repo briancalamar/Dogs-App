@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const { expect } = require('chai');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
@@ -44,13 +43,3 @@ describe('Dogs routes', () => {
   })
 });
 });
-
-
-
-// it('should get bd dog', () => {
-//   agent.get('/dogs?fs=bd').then((res) => {
-//     expect(res.body).to.be.equal({
-
-//     });
-//   })
-// });

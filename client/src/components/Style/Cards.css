@@ -5,9 +5,15 @@
     flex-wrap: wrap;
     justify-content: space-around;
     text-decoration: none;
-    padding-right: 30px;
 }
 
 .cards-link {
     text-decoration: none;
+}
+
+@media (max-width: 500px) {
+    .cards {
+        width: 50vw;
+        min-width: 400px;
+    }
 }

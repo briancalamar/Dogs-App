@@ -1,9 +1,9 @@
-import CardTemperament from './CardTemperament';
-import { connect } from "react-redux";
 import { useEffect, useState } from "react";
-import { infoPage, resetInfo, getTemperaments, getDogsFilter, detailDog } from "../reducer/actions";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { infoPage, resetInfo, getTemperaments, getDogsFilter, detailDog } from "../reducer/actions";
 import CardDog from './CardDog';
+import CardTemperament from './CardTemperament';
 import './Style/Temperaments.css'
 
 function Temperaments({ getTemperaments, resetInfo, Stemp, getDogsFilter, dogsFilter, detailDog }) {
