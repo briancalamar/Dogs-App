@@ -1,6 +1,6 @@
 require('dotenv').config();
+const express = require('express');
 const { Router } = require('express');
-const bodyParser = require('body-parser');
 const axios = require('axios').default;
 const { Dog, Temperament, dog_temperamet } = require('../db');
 const { refactorData, orderData } = require('../functions/dogs')
@@ -12,11 +12,7 @@ const { API_KEY } = process.env;
 
 const router = Router();
 
-router.use(bodyParser.json())
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-
-var dogsBd = [];
+router.use(express.json())
 
 router.get('/', async (req, res) => {
     let { name: n, page, o, fs, ft } = req.query;

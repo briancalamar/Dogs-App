@@ -18,7 +18,7 @@ function Temperaments({ getTemperaments, resetInfo, Stemp, getDogsFilter, dogsFi
     useEffect(() => {
         resetInfo()
         getTemperaments();
-    }, [])
+    }, [getTemperaments,resetInfo])
 
     async function handleClick(nameId) {
         if (typeof nameId !== "number") {

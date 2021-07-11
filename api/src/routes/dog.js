@@ -1,15 +1,11 @@
 require('dotenv').config();
+const express = require('express');
 const { Router } = require('express');
-const bodyParser = require('body-parser');
 const { Dog } = require('../db');
-
-
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
 
 const router = Router();
 
-router.use(bodyParser.json())
+router.use(express.json())
 
 router.post('/', async (req, res) => {
     let { 

@@ -12,9 +12,13 @@ function Cards({ dogs, getDogs, infoPage, resetInfo, detailDog }) {
     const loading = "https://img.wattpad.com/ce00d7500eb37a2ddd990ee3abdb080f15f10d21/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f32524c6464573337424f694e32773d3d2d3537313733383330342e313532633837333730633066313666343837383530383830323730362e676966"
 
 
+    // const notFound = "client/src/img/notFound.jpg"
+
+    // const loading = "client/src/img/loading.gif"
+
     useEffect(() => {
         getDogs(infoPage);
-    }, [infoPage])
+    }, [infoPage, getDogs])
 
     function handleClick(id) {
         resetInfo()
@@ -42,7 +46,7 @@ function Cards({ dogs, getDogs, infoPage, resetInfo, detailDog }) {
                             <Link
                                 to={`/home/${e.name}`}
                                 onClick={() => handleClick(e.id)}
-                                key={e.id}
+                                key={e.name}
                                 className="cards-link">
                                 <CardDog
                                     id={e.id}

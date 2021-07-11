@@ -9,7 +9,6 @@ export default function CardDog({ name, temperaments, image }) {
     };
 
     if(temperaments?.length > 5) {
-        // let more = temperaments.length - 5
         temperaments = temperaments.slice(0,5)
         temperaments.push((`... more temperaments`))
     }

@@ -24,7 +24,7 @@ function CreateDog({ Stemp, getTemperaments, createDog }) {
 
     useEffect(() => {
         getTemperaments();
-    }, [])
+    }, [getTemperaments])
 
     function handleChange(e) {
         if (e.target.name === "temperaments") {
