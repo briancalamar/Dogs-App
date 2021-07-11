@@ -13,12 +13,12 @@ function Sorts({ infoPage, page }) {
 
     useEffect(() => {
         if (page === 1) {
-            setSort({
+            setSort( () => ({
                 ...sort,
                 page,
-            })
+            }))
         }
-    }, [page])
+    }, [page, setSort])
 
     function handleClick(e) {
         e.preventDefault();
