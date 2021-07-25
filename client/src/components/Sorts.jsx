@@ -1,10 +1,14 @@
-import { connect } from "react-redux";
-import { infoPage, resetInfo } from "../reducer/actions";
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { infoPage, resetInfo } from "../reducer/actions";
 import './Style/Sorts.css'
 
-function Sorts({ infoPage, page }) {
+export default function Sorts() {
+
+    const dispatch = useDispatch()
+    const page = useSelector(store => store.infoPage.page)
+
     const [sort, setSort] = useState({
         page: 1,
         order: "na",
@@ -18,7 +22,7 @@ function Sorts({ infoPage, page }) {
                 page,
             })
         }
-    }, [page])
+    }, [page, sort])
 
     function handleClick(e) {
         e.preventDefault();
@@ -39,24 +43,30 @@ function Sorts({ infoPage, page }) {
                 })
         };
         if (event === "filterSource") {
-            (sort.order === "wd" || sort.order === "wa") ?
-                setSort({
-                    page: 1,
-                    order: undefined,
-                    filterSource: value,
-                }) :
+            if (value === "all") {
                 setSort({
                     ...sort,
                     page: 1,
-                    filterSource: value,
+                    filterSource: undefined,
                 })
+            }
+            else {
+
+                (sort.order === "wd" || sort.order === "wa") ?
+                    setSort({
+                        page: 1,
+                        order: undefined,
+                        filterSource: value,
+                    }) :
+                    setSort({
+                        ...sort,
+                        page: 1,
+                        filterSource: value,
+                    })
+            }
         };
         if (event === "reset") {
-            setSort({
-                page: 1,
-                order: "na",
-                filterSource: undefined,
-            })
+            dispatch(resetInfo())
         };
 
 
@@ -64,7 +74,7 @@ function Sorts({ infoPage, page }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        infoPage(sort)
+        dispatch(infoPage(sort))
     }
 
     async function handlePage(e) {
@@ -75,7 +85,7 @@ function Sorts({ infoPage, page }) {
         if (sort.page > 1 && event === "previous") {
             setSort({ ...sort, page: --sort.page })
         }
-        infoPage({ page: sort.page })
+        dispatch(infoPage({ page: sort.page }))
     }
 
     return (
@@ -85,6 +95,7 @@ function Sorts({ infoPage, page }) {
                 <div className="sort-select">
                     <p className="sort-p"> Sort By </p>
                     <select name="Sort by" className="sort-btn">
+                        <option selected disabled>Select</option>
                         <option
                             title="order"
                             value="wa"
@@ -105,18 +116,21 @@ function Sorts({ infoPage, page }) {
                 </div>
                 <div className="sort-filter">
                     <p className="sort-p"> Filter By </p>
-                    <button
-                        value="bd"
-                        type="button"
-                        title="filterSource"
-                        className="sort-btn"
-                        onClick={handleClick}> Created by users </button>
-                    <button
-                        value="api"
-                        type="button"
-                        title="filterSource"
-                        className="sort-btn"
-                        onClick={handleClick}> Pre Created </button>
+                    <select name="Filter by" className="sort-btn">
+                        <option selected disabled>Select</option>
+                        <option
+                            title="filterSource"
+                            value="all"
+                            onClick={handleClick}> All </option>
+                        <option
+                            title="filterSource"
+                            value="bd"
+                            onClick={handleClick}> Created by users  </option>
+                        <option
+                            title="filterSource"
+                            value="api"
+                            onClick={handleClick}> Pre Created </option>
+                    </select>
                 </div>
                 <div className="sort-send">
                     <button
@@ -144,18 +158,4 @@ function Sorts({ infoPage, page }) {
     )
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        infoPage: (data) => dispatch(infoPage(data)),
-        resetInfo: () => dispatch(resetInfo())
-    }
-}
-
-function mapStateToProps(state) {
-    return {
-        page: state.infoPage.page
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sorts)
 

@@ -1,26 +1,22 @@
 require('dotenv').config();
+const express = require('express');
 const { Router } = require('express');
-const bodyParser = require('body-parser');
 const axios = require('axios').default;
-const { Dog, Temperament, dog_temperamet } = require('../db');
+const { Dog, Temperament } = require('../db');
 const { refactorData, orderData } = require('../functions/dogs')
 const { API_KEY } = process.env;
 
-
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-
 const router = Router();
 
-router.use(bodyParser.json())
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+// Middlewares;
+router.use(express.json())
 
-var dogsBd = [];
+
+// Appointments
 
 router.get('/', async (req, res) => {
     let { name: n, page, o, fs, ft } = req.query;
-    if (page === "undefined" || page <= 0) page = 1;
+    if (page === "undefined" || page <= 0 || !page) page = 1;
     if (n === "undefined") n = undefined;
     if (o === "undefined") o = undefined;
     if (fs === "undefined") fs = undefined;
@@ -41,8 +37,9 @@ router.get('/', async (req, res) => {
 
     newdata = [...dataApi, ...dataBd];
 
+    
     if (ft !== undefined) return res.json(newdata)
-
+    
     if (n) {
         newdata = newdata.filter(e => e.name.toLowerCase().includes(n.toLocaleLowerCase()))
         if(newdata.length === 0) return res.json([{error: "Dog Not Found"}])
@@ -53,7 +50,7 @@ router.get('/', async (req, res) => {
         if(fs === "api") newdata = [...dataApi]
         else if(fs === "bd") newdata = [...dataBd]
     }
-
+    
     if (o) newdata = orderData(newdata, o)
 
     res.json(newdata.slice(spliceMin, spliceMax))

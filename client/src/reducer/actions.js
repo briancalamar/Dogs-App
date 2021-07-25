@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export function getDogs({name, page, order, filterSource, ft}) {
     return (dispatch) => {
-        axios.get(`http://localhost:3001/dogs?name=${name}&page=${page}&o=${order}&fs=${filterSource}`).then(response => {
+        axios.get(`/dogs?name=${name}&page=${page}&o=${order}&fs=${filterSource}`).then(response => {
             dispatch({ type: "GET_DOGS", payload: response.data })
         })
     }
@@ -10,7 +10,7 @@ export function getDogs({name, page, order, filterSource, ft}) {
 
 export function getDogsFilter({filterTemperaments}) {
     return (dispatch) => {
-        axios.get(`http://localhost:3001/dogs?ft=${filterTemperaments}`).then(response => {
+        axios.get(`/dogs?ft=${filterTemperaments}`).then(response => {
             dispatch({ type: "GET_DOGS_FILTER", payload: response.data })
         })
     }
@@ -19,7 +19,7 @@ export function getDogsFilter({filterTemperaments}) {
 
 export function getTemperaments() {
     return (dispatch) => {
-        axios.get(`http://localhost:3001/temperament`).then(response => {
+        axios.get(`/temperament`).then(response => {
             dispatch({ type: "GET_TEMP", payload: response.data })
         })
     }
@@ -35,7 +35,7 @@ export function resetInfo() {
 
 export function detailDog(id) {
     return (dispatch) => {
-        axios.get(`http://localhost:3001/dogs/${id}`).then(response => {
+        axios.get(`/dogs/${id}`).then(response => {
             dispatch({ type: "DETAIL_DOG", payload: response.data })
         })
     }
@@ -47,7 +47,7 @@ export function showBar() {
 
 export function createDog(data) {
     return (dispatch) => {
-        axios.post(`http://localhost:3001/dog`, data).then(response => {
+        axios.post(`/dog`, data).then(response => {
             dispatch({ type: "CREATE_DOG", payload: response.data })
         })
     }

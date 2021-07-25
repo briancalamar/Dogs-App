@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router"
-import { connect } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { createDog, getTemperaments } from "../reducer/actions"
 import './Style/CreateDog.css'
 import { IoPawSharp } from 'react-icons/io5'
 
 
-function CreateDog({ Stemp, getTemperaments, createDog }) {
+export default function CreateDog() {
+
+    const temperaments = useSelector( store => store.temperaments)
+    const dispatch = useDispatch()
+
     const [dog, setDog] = useState({
         name: undefined,
         heightMin: undefined,
@@ -23,8 +27,8 @@ function CreateDog({ Stemp, getTemperaments, createDog }) {
     const emptyImage = "https://st.depositphotos.com/1798678/3986/v/600/depositphotos_39864187-stock-illustration-dog-silhouette-vector.jpg"
 
     useEffect(() => {
-        getTemperaments();
-    }, [])
+        dispatch(getTemperaments());
+    }, [dispatch])
 
     function handleChange(e) {
         if (e.target.name === "temperaments") {
@@ -50,8 +54,8 @@ function CreateDog({ Stemp, getTemperaments, createDog }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        await createDog(dog)
-        alert(" Breed created. Find your dog by name")
+        await dispatch(createDog(dog));
+        alert(" Breed created. Find your dog by name");
         history.push(`/home`)
     }
 
@@ -84,10 +88,11 @@ function CreateDog({ Stemp, getTemperaments, createDog }) {
                         onChange={handleChange} required />
                     <p>Temperaments</p>
                     {
-                        Stemp === null ? <p> Loading </p> :
-                            <select name="temperaments" onChange={handleChange}>
+                        temperaments === null 
+                        ? <p> Loading </p> 
+                        : <select name="temperaments" onChange={handleChange}>
                                 {
-                                    Stemp.map((e) => <option key={e.id}>{`${e.name} | ${e.id}`}</option>)
+                                    temperaments.map((e) => <option key={e.id}>{`${e.name} | ${e.id}`}</option>)
                                 }
                             </select>
                     }
@@ -153,19 +158,3 @@ function CreateDog({ Stemp, getTemperaments, createDog }) {
         </div>
     )
 }
-
-
-function mapDispatchToProps(dispatch) {
-    return {
-        getTemperaments: () => dispatch(getTemperaments()),
-        createDog: (info) => dispatch(createDog(info)),
-    }
-}
-
-function mapStateToProps(state) {
-    return {
-        Stemp: state.temperaments,
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateDog)

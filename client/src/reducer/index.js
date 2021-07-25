@@ -66,16 +66,6 @@ export default function reducer(state = initialState, action) {
             }
         }
         //-------------------
-        default: { return state }
+        default: return state
     }
 }
-
-// case "SHOW_BAR": {
-//     return state = {
-//         ...state,
-//         infoPage: {
-//             ...state.infoPage,
-//             showBar: !state.infoPage.showBar
-//         }
-//     }
-// }

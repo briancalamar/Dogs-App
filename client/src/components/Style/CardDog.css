@@ -1,7 +1,6 @@
 .cardDog {
     border-radius: 10px;
-    /* width: 500px; */
-    width: 40vw;
+    width: 37vw;
     height: 350px;
     background-size: contain;
     display: flex;
@@ -25,8 +24,8 @@
 }
 
 .cardDog:hover {
-    width: 450px;
-    height: 300px;
+    width: 40vw;
+    height: 380px;
 }
 
 .info-cd:hover {
@@ -43,12 +42,12 @@
 
 @media (max-width: 600px) {
     .cardDog {
-        width: 70vw;
+        width: 90%;
         height: 200px;
     }
 
     .cardDog:hover {
-        width: 80vw;
+        width: 20%;
         height: 250px;
     }
 }
