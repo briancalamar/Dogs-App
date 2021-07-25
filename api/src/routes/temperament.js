@@ -1,16 +1,15 @@
 require('dotenv').config();
 const express = require('express');
 const { Router } = require('express');
-const axios = require('axios').default;
-const { Dog, Temperament } = require('../db');
-const { Op } = require('sequelize'); 
-const { API_KEY } = process.env;
-const { cargadoBD } = require('../functions')
-
+const { Temperament } = require('../db');
 
 const router = Router();
 
+//Middlewares
 router.use(express.json())
+
+
+//Appointments
 
 router.get('/', async (req, res) => {
     try {

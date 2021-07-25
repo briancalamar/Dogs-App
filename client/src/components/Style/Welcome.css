@@ -60,3 +60,15 @@
         box-shadow: 0 0 20px black;
     }
 }
+
+@media (max-width: 600px) {
+    .w-t{
+        height: 70%;
+
+    }
+    .w-t p {
+        margin: 50px;
+        font-size: 1.3em;
+    }
+    
+}

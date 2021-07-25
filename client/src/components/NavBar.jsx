@@ -1,28 +1,29 @@
-import './Style/NavBar.css'
-import { connect } from "react-redux"
-import { resetInfo, search } from "../reducer/actions"
 import { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { resetInfo, search } from "../reducer/actions"
 import { FaSearch } from 'react-icons/fa'
 import logo from '../dog.png'
+import './Style/NavBar.css'
 
-function CardDog({ search, resetInfo }) {
+export default function CardDog() {
+
     const [input, setInput] = useState('');
     const history = useHistory()
-
+    const dispatch = useDispatch()
 
     function handleChange(e) {
         setInput(e.target.value);
     }
 
     function handleClick() {
-        resetInfo()
+        dispatch(resetInfo())
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        resetInfo()
-        search(input)
+        dispatch(resetInfo())
+        dispatch(search(input))
         setInput("")
         history.push("/home")
     }
@@ -64,13 +65,4 @@ function CardDog({ search, resetInfo }) {
         </div>
     )
 }
-
-function mapDispatchToProps(dispatch) {
-    return {
-        search: (name) => dispatch(search(name)),
-        resetInfo: () => dispatch(resetInfo())
-    }
-}
-
-export default connect(null, mapDispatchToProps)(CardDog)
 

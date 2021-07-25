@@ -3,9 +3,14 @@ const express = require('express');
 const { Router } = require('express');
 const { Dog } = require('../db');
 
+
 const router = Router();
 
+//Middlewares
 router.use(express.json())
+
+
+//Appointments
 
 router.post('/', async (req, res) => {
     let { 
