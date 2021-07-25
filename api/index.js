@@ -5,10 +5,18 @@ const {PORT} = process.env
 
 conn.sync({ force: false }).then(() => {
   server.listen(PORT, async () => {
-    console.log('%s listening at 3001'); 
 
-    await cargaBb()
+    try {
+      console.log('%s listening at 3001'); 
+  
+      await cargaBb()
+  
+      console.log("success upload")
+      
+    } catch (error) {
+      console.log(" -------------")
+      console.log(error)
+    }
 
-    console.log("success upload")
   });
 });

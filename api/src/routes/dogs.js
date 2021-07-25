@@ -15,45 +15,51 @@ router.use(express.json())
 // Appointments
 
 router.get('/', async (req, res) => {
-    let { name: n, page, o, fs, ft } = req.query;
-    if (page === "undefined" || page <= 0 || !page) page = 1;
-    if (n === "undefined") n = undefined;
-    if (o === "undefined") o = undefined;
-    if (fs === "undefined") fs = undefined;
-    if (ft === "undefined") ft = undefined;
-    let spliceMin = 8 * (page - 1);
-    let spliceMax = (page * 8)
-
-    let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`);
-
-    let dataApi = refactorData(data, "limited")
-
-    let dataBd = await Dog.findAll({
-        attributes: ['id', 'name', 'image', 'weight'],
-        include: Temperament,
-    })
-
-    dataBd = refactorData(dataBd, "limited")
-
-    newdata = [...dataApi, ...dataBd];
-
     
-    if (ft !== undefined) return res.json(newdata)
-    
-    if (n) {
-        newdata = newdata.filter(e => e.name.toLowerCase().includes(n.toLocaleLowerCase()))
-        if(newdata.length === 0) return res.json([{error: "Dog Not Found"}])
+    try {
+        let { name: n, page, o, fs, ft } = req.query;
+        if (page === "undefined" || page <= 0 || !page) page = 1;
+        if (n === "undefined") n = undefined;
+        if (o === "undefined") o = undefined;
+        if (fs === "undefined") fs = undefined;
+        if (ft === "undefined") ft = undefined;
+        let spliceMin = 8 * (page - 1);
+        let spliceMax = (page * 8)
+        
+        let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`);
+        
+        let dataApi = refactorData(data, "limited")
+        
+        let dataBd = await Dog.findAll({
+            attributes: ['id', 'name', 'image', 'weight'],
+            include: Temperament,
+        })
+        
+        dataBd = refactorData(dataBd, "limited")
+        
+        newdata = [...dataApi, ...dataBd];
+        
+        
+        if (ft !== undefined) return res.json(newdata)
+        
+        if (n) {
+            newdata = newdata.filter(e => e.name.toLowerCase().includes(n.toLocaleLowerCase()))
+            if(newdata.length === 0) return res.json([{error: "Dog Not Found"}])
+        }
+        
+        if(fs){
+            fs = fs.toLowerCase();
+            if(fs === "api") newdata = [...dataApi]
+            else if(fs === "bd") newdata = [...dataBd]
+        }
+        
+        if (o) newdata = orderData(newdata, o)
+        
+        res.json(newdata.slice(spliceMin, spliceMax))
+    } catch (error) {
+        console.log(error)
     }
-    
-    if(fs){
-        fs = fs.toLowerCase();
-        if(fs === "api") newdata = [...dataApi]
-        else if(fs === "bd") newdata = [...dataBd]
-    }
-    
-    if (o) newdata = orderData(newdata, o)
 
-    res.json(newdata.slice(spliceMin, spliceMax))
 })
 
 router.get('/:idRaza', async (req, res) => {
