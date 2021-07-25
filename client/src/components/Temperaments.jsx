@@ -16,15 +16,9 @@ export default function Temperaments() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-<<<<<<< HEAD
         dispatch(resetInfo());
         dispatch(getTemperaments());
     }, [dispatch])
-=======
-        resetInfo()
-        getTemperaments();
-    }, [getTemperaments,resetInfo])
->>>>>>> 38ea3adc94ba1feef65fcb3145c71c504c979c7e
 
     async function handleClick(nameId) {
         if (typeof nameId !== "number") {

@@ -22,11 +22,7 @@ export default function Sorts() {
                 page,
             }))
         }
-<<<<<<< HEAD
     }, [page, sort])
-=======
-    }, [page, setSort])
->>>>>>> 38ea3adc94ba1feef65fcb3145c71c504c979c7e
 
     function handleClick(e) {
         e.preventDefault();

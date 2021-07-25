@@ -2,11 +2,8 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-<<<<<<< HEAD
 const { Client } = require('pg');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
-
-if (process.env) console.log(process.env.DATABASE_URL)
 
 const sequelize =
   process.env.NODE_ENV === "production"
@@ -29,16 +26,6 @@ const sequelize =
       }
     );
 
-=======
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
-
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
-  logging: false, 
-  native: false, 
-});
->>>>>>> 38ea3adc94ba1feef65fcb3145c71c504c979c7e
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

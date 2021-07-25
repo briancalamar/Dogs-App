@@ -18,13 +18,8 @@ export default function Cards() {
     // const loading = "client/src/img/loading.gif"
 
     useEffect(() => {
-<<<<<<< HEAD
         dispatch(getDogs(infoPage))
     }, [infoPage, dispatch])
-=======
-        getDogs(infoPage);
-    }, [infoPage, getDogs])
->>>>>>> 38ea3adc94ba1feef65fcb3145c71c504c979c7e
 
     function handleClick(id) {
         dispatch(resetInfo())

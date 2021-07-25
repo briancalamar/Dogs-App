@@ -3,7 +3,6 @@ const express = require('express');
 const { Router } = require('express');
 const { Dog } = require('../db');
 
-<<<<<<< HEAD
 
 const router = Router();
 
@@ -12,11 +11,6 @@ router.use(express.json())
 
 
 //Appointments
-=======
-const router = Router();
-
-router.use(express.json())
->>>>>>> 38ea3adc94ba1feef65fcb3145c71c504c979c7e
 
 router.post('/', async (req, res) => {
     let { 
