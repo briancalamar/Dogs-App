@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = async (sequelize) => {
-  // defino el modelo
   const Dog = sequelize.define('dog', {
     name: {
       type: DataTypes.STRING,

@@ -8,11 +8,15 @@ const { API_KEY } = process.env;
 
 const router = Router();
 
+<<<<<<< HEAD
 // Middlewares;
 router.use(express.json())
 
 
 // Appointments
+=======
+router.use(express.json())
+>>>>>>> 38ea3adc94ba1feef65fcb3145c71c504c979c7e
 
 router.get('/', async (req, res) => {
     let { name: n, page, o, fs, ft } = req.query;

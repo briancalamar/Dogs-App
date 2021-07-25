@@ -27,8 +27,13 @@ export default function CreateDog() {
     const emptyImage = "https://st.depositphotos.com/1798678/3986/v/600/depositphotos_39864187-stock-illustration-dog-silhouette-vector.jpg"
 
     useEffect(() => {
+<<<<<<< HEAD
         dispatch(getTemperaments());
     }, [dispatch])
+=======
+        getTemperaments();
+    }, [getTemperaments])
+>>>>>>> 38ea3adc94ba1feef65fcb3145c71c504c979c7e
 
     function handleChange(e) {
         if (e.target.name === "temperaments") {

@@ -13,9 +13,18 @@ export default function Cards() {
     const dogs = useSelector( store => store.dogs)
     const infoPage = useSelector( store => store.infoPage)
 
+    // const notFound = "client/src/img/notFound.jpg"
+
+    // const loading = "client/src/img/loading.gif"
+
     useEffect(() => {
+<<<<<<< HEAD
         dispatch(getDogs(infoPage))
     }, [infoPage, dispatch])
+=======
+        getDogs(infoPage);
+    }, [infoPage, getDogs])
+>>>>>>> 38ea3adc94ba1feef65fcb3145c71c504c979c7e
 
     function handleClick(id) {
         dispatch(resetInfo())
@@ -46,7 +55,7 @@ export default function Cards() {
                             <Link
                                 to={`/home/${e.name}`}
                                 onClick={() => handleClick(e.id)}
-                                key={e.id}
+                                key={e.name}
                                 className="cards-link">
                                 <CardDog
                                     id={e.id}
