@@ -19,12 +19,12 @@ export default function Sorts() {
 
 
         if (page === 1) {
-            setSort( (sort) => ({
+            setSort((sort) => ({
                 ...sort,
                 page,
             }))
         }
-    }, [page, ])
+    }, [page])
 
     function handleClick(e) {
         e.preventDefault();
