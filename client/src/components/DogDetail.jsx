@@ -5,7 +5,9 @@ import loading from '../img/Loading.gif'
 
 export default function DogDetail() {
 
-    const dog = useSelector( store => store.DogDetail)
+    const dog = useSelector( store => store.detailDog)
+
+    console.log(dog)
 
     return (
         <div className="detailDog"> 
