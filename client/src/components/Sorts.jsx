@@ -16,13 +16,15 @@ export default function Sorts() {
     })
 
     useEffect(() => {
+
+
         if (page === 1) {
-            setSort( () => ({
+            setSort( (sort) => ({
                 ...sort,
                 page,
             }))
         }
-    }, [page, sort])
+    }, [page, ])
 
     function handleClick(e) {
         e.preventDefault();
@@ -95,7 +97,7 @@ export default function Sorts() {
                 <div className="sort-select">
                     <p className="sort-p"> Sort By </p>
                     <select name="Sort by" className="sort-btn">
-                        <option selected disabled>Select</option>
+                        <option disabled>Select</option>
                         <option
                             title="order"
                             value="wa"
@@ -117,7 +119,7 @@ export default function Sorts() {
                 <div className="sort-filter">
                     <p className="sort-p"> Filter By </p>
                     <select name="Filter by" className="sort-btn">
-                        <option selected disabled>Select</option>
+                        <option disabled>Select</option>
                         <option
                             title="filterSource"
                             value="all"

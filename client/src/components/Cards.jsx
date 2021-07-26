@@ -13,10 +13,6 @@ export default function Cards() {
     const dogs = useSelector( store => store.dogs)
     const infoPage = useSelector( store => store.infoPage)
 
-    // const notFound = "client/src/img/notFound.jpg"
-
-    // const loading = "client/src/img/loading.gif"
-
     useEffect(() => {
         dispatch(getDogs(infoPage))
     }, [infoPage, dispatch])
