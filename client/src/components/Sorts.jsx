@@ -92,7 +92,8 @@ export default function Sorts() {
 
     return (
         <div className="sort">
-            <form onSubmit={handleSubmit}
+            { window.screen.width > 450 &&
+             <form onSubmit={handleSubmit}
                 className="sort-form">
                 <div className="sort-select">
                     <p className="sort-p"> Sort By </p>
@@ -145,11 +146,11 @@ export default function Sorts() {
                         onSubmit={handleSubmit}
                         className="sort-btn"> Apply </button>
                 </div>
+            </form>}
                 <div className="sort-temp">
                     <p className="sort-p">Temperaments</p>
                     <Link to="/temperaments"><button className="sort-btn">Temperaments</button></Link>
                 </div>
-            </form>
             <div className="next-prev">
                 <p className="sort-p">Page</p>
                 <div className="next-p-b">
