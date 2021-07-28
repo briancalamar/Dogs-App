@@ -24,5 +24,5 @@ Para el Frontend, se creo una SPA mediante ReactJS, en conjunto con las libreria
 
 Espero les guste el proyecto! Dejo el link aqui debajo.
 
-dogs-santaranbrian.herokuapp.com/
+https://dogs-app-bs.vercel.app
  
