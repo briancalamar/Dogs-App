@@ -36,7 +36,7 @@ export default function Sorts() {
                 setSort({
                     page: 1,
                     order: value,
-                    filterSource: undefined,
+                    // filterSource: undefined,
                 }) :
                 setSort({
                     ...sort,
@@ -96,12 +96,13 @@ export default function Sorts() {
                 className="sort-form">
                 <div className="sort-select">
                     <p className="sort-p"> Sort By </p>
-                    <select name="Sort by" className="sort-btn">
+                    <select title="order" className="sort-btn">
                         <option disabled>Select</option>
                         <option
                             title="order"
                             value="wa"
-                            onClick={handleClick}> Weight: Min to Max </option>
+                            onClick={handleClick}
+                            onKeyPress={handleClick}> Weight: Min to Max </option>
                         <option
                             title="order"
                             value="wd"
@@ -118,7 +119,7 @@ export default function Sorts() {
                 </div>
                 <div className="sort-filter">
                     <p className="sort-p"> Filter By </p>
-                    <select name="Filter by" className="sort-btn">
+                    <select title="filterSource" className="sort-btn">
                         <option disabled>Select</option>
                         <option
                             title="filterSource"
