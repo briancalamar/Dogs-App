@@ -17,16 +17,14 @@ router.use(express.json())
 router.get('/', async (req, res) => {
     
     try {
-        let { name: n, page, o, fs, ft } = req.query;
-        if (page === "undefined" || page <= 0 || !page) page = 1;
-        if (n === "undefined") n = undefined;
-        if (o === "undefined") o = undefined;
-        if (fs === "undefined") fs = undefined;
-        if (ft === "undefined") ft = undefined;
+        let { name, page, order, creator, temperament } = req.query;
+        if (page <= 0) page = 1;
         let spliceMin = 8 * (page - 1);
         let spliceMax = (page * 8)
+        console.log(name, page, order, creator)
         
         let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`);
+        return res.json(data)
         
         let dataApi = refactorData(data, "limited")
         
@@ -40,26 +38,25 @@ router.get('/', async (req, res) => {
         newdata = [...dataApi, ...dataBd];
         
         
-        if (ft !== undefined) return res.json(newdata)
-        
-        if (n) {
-            newdata = newdata.filter(e => e.name.toLowerCase().includes(n.toLocaleLowerCase()))
+        if (name) {
+            newdata = newdata.filter(e => e.name.toLowerCase().includes(name.toLocaleLowerCase()))
             if(newdata.length === 0) return res.json([{error: "Dog Not Found"}])
+            else return res.json(newdata.slice(spliceMin, spliceMax))
         }
         
-        if(fs){
-            fs = fs.toLowerCase();
-            if(fs === "api") newdata = [...dataApi]
-            else if(fs === "bd") newdata = [...dataBd]
+        if(creator){
+            creator = creator.toLowerCase();
+            if(creator === "api") newdata = [...dataApi]
+            else if(creator === "bd") newdata = [...dataBd]
         }
         
-        if (o) newdata = orderData(newdata, o)
+        // if (temperament) return res.json(newdata)
+        if (order) newdata = orderData(newdata, order)
         
         res.json(newdata.slice(spliceMin, spliceMax))
     } catch (error) {
         console.log(error)
     }
-
 })
 
 router.get('/:idRaza', async (req, res) => {
