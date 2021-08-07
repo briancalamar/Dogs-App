@@ -3,7 +3,7 @@ const { conn } = require('./src/db.js');
 const { cargaBb } = require ('./src/functions')
 const {PORT} = process.env
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(PORT, async () => {
 
     try {

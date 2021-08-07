@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export function getDogs({name, page, order, filterSource, ft}) {
     return (dispatch) => {
-        axios.get(`/dogs?name=${name}&page=${page}&o=${order}&fs=${filterSource}`).then(response => {
+        axios.get(`/dogs?name=${name}&page=${page}&order=${order}&creator=${filterSource}`).then(response => {
             dispatch({ type: "GET_DOGS", payload: response.data })
         })
     }

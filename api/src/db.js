@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const { Client } = require('pg');
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DATABASE_URL } = process.env;
+const { DATABASE_URL } = process.env;
 
 const sequelize =
   process.env.NODE_ENV === "production"
@@ -19,7 +19,7 @@ const sequelize =
       }
     })
     // DEV
-    : new Sequelize( `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+    : new Sequelize( DATABASE_URL,
       {
         logging: false,
         native: false,

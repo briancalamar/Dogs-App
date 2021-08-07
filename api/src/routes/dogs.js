@@ -23,20 +23,16 @@ router.get('/', async (req, res) => {
         let spliceMax = (page * 8)
         console.log(name, page, order, creator)
         
-        let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`);
-        return res.json(data)
+        // let { data } = await axios.get(`https://api.thedogapi.com/v1/breeds${API_KEY}`);
         
-        let dataApi = refactorData(data, "limited")
+        // let dataApi = refactorData(data, "limited")
         
         let dataBd = await Dog.findAll({
             attributes: ['id', 'name', 'image', 'weight'],
             include: Temperament,
         })
         
-        dataBd = refactorData(dataBd, "limited")
-        
-        newdata = [...dataApi, ...dataBd];
-        
+        newdata = refactorData(dataBd, "limited")
         
         if (name) {
             newdata = newdata.filter(e => e.name.toLowerCase().includes(name.toLocaleLowerCase()))
@@ -52,7 +48,7 @@ router.get('/', async (req, res) => {
         
         // if (temperament) return res.json(newdata)
         if (order) newdata = orderData(newdata, order)
-        
+        console.log(newdata)
         res.json(newdata.slice(spliceMin, spliceMax))
     } catch (error) {
         console.log(error)

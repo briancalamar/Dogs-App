@@ -7,11 +7,11 @@ module.exports = async (sequelize) => {
       allowNull: false,
     },
     height: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     weight:{
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     life_span:{
@@ -22,12 +22,12 @@ module.exports = async (sequelize) => {
     },
   });
 
-  Dog.beforeCreate(async (dog) => {
-    if( isNaN( await Dog.max("id"))){
-        dog.id = 1000;
-    }
-    else dog.id = await Dog.max("id") + 1
-  });
+  // Dog.beforeCreate(async (dog) => {
+  //   if( isNaN( await Dog.max("id"))){
+  //       dog.id = 1000;
+  //   }
+  //   else dog.id = await Dog.max("id") + 1
+  // });
 };
 
 

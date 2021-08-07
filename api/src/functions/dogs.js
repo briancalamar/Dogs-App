@@ -18,12 +18,23 @@ const refactorData = function (data, el) {
                     else if (!e.weight[0] && e.weight[1]) e.weight = e.weight[1];
                     else e.weight = null;
                 }
+                if (e.height?.metric) {
+                    e.height = e.height.metric.split("-")
+                        .map(heights => { return parseInt(heights.trim()) })
+
+                    if (e.height[0] && e.height[1]) e.height = (e.height[0] + e.height[1]) / 2;
+                    else if (e.height[0] && !e.height[1]) e.height = e.height[0];
+                    else if (!e.height[0] && e.height[1]) e.height = e.height[1];
+                    else e.height = null;
+                }
                 return {
-                    id: e.id,
+                    // id: e.id,
                     name: e.name,
                     image: e.image.url,
                     temperaments: e.temperament,
-                    weight: e.weight,
+                    weight: e.weight ? e.weight : "no data",
+                    height: e.height ? e.height : "no data",
+                    life_span: e.life_span ? e.life_span : "no data",
                 }
             }
             else {
@@ -40,7 +51,7 @@ const refactorData = function (data, el) {
                     else e.weight = null;
                 }
                 return {
-                    id: e.id,
+                    // id: e.id,
                     name: e.name,
                     image: e.image,
                     temperaments: e.temperaments,
