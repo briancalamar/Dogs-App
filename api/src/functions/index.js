@@ -2,9 +2,45 @@ require('dotenv').config();
 const { API_KEY } = process.env;
 const { Temperament, Dog } = require('../db');
 const axios = require('axios').default
-const { refactorData } = require('../functions/dogs')
 
 // Carga BD
+const refactorAPI = function (data) {
+    return data.map(e => {
+
+        if (e.temperament) {
+            e.temperament = e.temperament.split(",")
+                .map(temperaments => { return temperaments.trim() })
+
+        }
+        if (e.weight?.metric) {
+            e.weight = e.weight.metric.split("-")
+                .map(weights => { return parseInt(weights.trim()) })
+
+            if (e.weight[0] && e.weight[1]) e.weight = (e.weight[0] + e.weight[1]) / 2;
+            else if (e.weight[0] && !e.weight[1]) e.weight = e.weight[0];
+            else if (!e.weight[0] && e.weight[1]) e.weight = e.weight[1];
+            else e.weight = 0;
+        }
+        if (e.height?.metric) {
+            e.height = e.height.metric.split("-")
+                .map(heights => { return parseInt(heights.trim()) })
+
+            if (e.height[0] && e.height[1]) e.height = (e.height[0] + e.height[1]) / 2;
+            else if (e.height[0] && !e.height[1]) e.height = e.height[0];
+            else if (!e.height[0] && e.height[1]) e.height = e.height[1];
+            else e.height = 0;
+        }
+        return {
+            name: e.name,
+            image: e.image.url,
+            temperaments: e.temperament ? e.temperament : [],
+            weight: e.weight,
+            height: e.height,
+            life_span: e.life_span.replace("years", "años"),
+        }
+    })
+};
+
 const pedidoApi = async function () {
 
     try {
@@ -20,8 +56,7 @@ const pedidoApi = async function () {
 
         })
 
-        data = await refactorData(data, "limited")
-
+        data = await refactorAPI(data)
         return {
             dogs: data,
             temps: Array.from(new Set(temps)),
@@ -32,52 +67,42 @@ const pedidoApi = async function () {
 
 }
 
-const cargaT = async function(temps) {
+const cargaT = async function (temps) {
     try {
         await temps.forEach(async (e) => {
             await Temperament.findOrCreate({
-                where: { name: `${e}` }
+                where: { name: e },
             })
         })
     } catch (error) {
-        
+
     }
 }
 
-const cargaD = async function(dogs) {
+const cargaD = async function (dogs, temps) {
     try {
-        await dogs.forEach(async (e) => {
+        await dogs.forEach(async (d) => {
+
             let [newDog, created] = await Dog.findOrCreate({
-                where: { name: e.name },
+                where: { name: d.name },
                 defaults: {
-                    name: e.name,
-                    image: e.image,
-                    // temperaments: e.temperaments,
-                    weight: e.weight,
-                    height: e.height,
-                    life_span: e.life_span
+                    name: d.name,
+                    image: d.image,
+                    weight: d.weight,
+                    height: d.height,
+                    life_span: d.life_span,
                 }
-            });
-
-            if(created && e.temperaments) {
-
-                let ids = [];
-
-                await e.temperaments.forEach(async (e) => {
-                    let temp = await Temperament.findOne({
-                        where:{
-                            name: e,
-                        }
-                    })
-                    if(temp.id !== "no data") ids.push(temp.id)
-                    
+            })
+            let ids = [];
+            if (created) {
+                await d.temperaments.forEach(async (t) => {
+                    ids.push((temps.indexOf(t) + 1))
                 })
-
                 await newDog.addTemperament(ids);
             }
         })
     } catch (error) {
-        
+
     }
 }
 
@@ -87,7 +112,7 @@ const cargaBb = async function () {
         let { dogs, temps } = await pedidoApi();
 
         await cargaT(temps)
-        await cargaD(dogs)
+        await cargaD(dogs, temps)
 
     } catch (error) {
         console.log(error)
